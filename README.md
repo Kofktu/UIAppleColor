@@ -29,7 +29,7 @@ public extension UIColor {
 }
 
 public struct UIAppleColor {
-	var systemBackground: UIColor
+    var systemBackground: UIColor
     var secondarySystemBackground: UIColor
     var tertiarySystemBackground: UIColor
     

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C3717ED32352BC3100FEF712 /* UIAppleColor.h in Headers */ = {isa = PBXBuildFile; fileRef = C3717ED12352BC3100FEF712 /* UIAppleColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3717EDA2352BC4C00FEF712 /* UIColor+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3717ED92352BC4C00FEF712 /* UIColor+Apple.swift */; };
+		C3BC912C23536478000A2A66 /* UIAppleColorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC912B23536478000A2A66 /* UIAppleColorWrapper.swift */; };
+		C3BC912E235366AD000A2A66 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3BC912D235366AD000A2A66 /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,6 +18,8 @@
 		C3717ED12352BC3100FEF712 /* UIAppleColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIAppleColor.h; sourceTree = "<group>"; };
 		C3717ED22352BC3100FEF712 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3717ED92352BC4C00FEF712 /* UIColor+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Apple.swift"; sourceTree = "<group>"; };
+		C3BC912B23536478000A2A66 /* UIAppleColorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAppleColorWrapper.swift; sourceTree = "<group>"; };
+		C3BC912D235366AD000A2A66 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +52,9 @@
 		C3717ED02352BC3100FEF712 /* UIAppleColor */ = {
 			isa = PBXGroup;
 			children = (
+				C3BC912D235366AD000A2A66 /* UIColor+Extension.swift */,
 				C3717ED92352BC4C00FEF712 /* UIColor+Apple.swift */,
+				C3BC912B23536478000A2A66 /* UIAppleColorWrapper.swift */,
 				C3717ED12352BC3100FEF712 /* UIAppleColor.h */,
 				C3717ED22352BC3100FEF712 /* Info.plist */,
 			);
@@ -135,6 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3BC912E235366AD000A2A66 /* UIColor+Extension.swift in Sources */,
+				C3BC912C23536478000A2A66 /* UIAppleColorWrapper.swift in Sources */,
 				C3717EDA2352BC4C00FEF712 /* UIColor+Apple.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

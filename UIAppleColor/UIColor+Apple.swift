@@ -15,45 +15,44 @@ public extension UIColor {
     
 }
 
-fileprivate extension UIColor {
+public final class UIAppleColor {
     
-    convenience init(hex6: UInt32, alpha: CGFloat = 1) {
-        let divisor = CGFloat(255)
-        let red     = CGFloat((hex6 & 0xFF0000) >> 16) / divisor
-        let green   = CGFloat((hex6 & 0x00FF00) >>  8) / divisor
-        let blue    = CGFloat( hex6 & 0x0000FF       ) / divisor
-        self.init(red: red, green: green, blue: blue, alpha: alpha)
+    fileprivate static var mode: UIAppleColor.Mode = .light
+    
+    enum Mode {
+        case light
+        case dark
+    }
+    
+    /// Versions below iOS 13 default Mode
+    /// - Parameter mode: Light/Dark Mode (below iOS 13)
+    static func setup(mode: UIAppleColor.Mode) {
+        self.mode = mode
+    }
+    
+    
+    /// Versions below iOS 13 Mode
+    /// iOS13 and above, color values based on system theme
+    /// - Parameter mode: Light/Dark Mode (below iOS 13)
+    func mode(_ mode: UIAppleColor.Mode) -> UIAppleColorWrapper<UIAppleColor> {
+        UIAppleColorWrapper<UIAppleColor>(self, mode: mode)
     }
     
 }
-
-public struct UIAppleColor {}
 
 // System Backgrounds
 public extension UIAppleColor {
     
     var systemBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemBackground
-        }
-        
-        return .white
+        mode(UIAppleColor.mode).systemBackground
     }
     
     var secondarySystemBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return .secondarySystemBackground
-        }
-        
-        return UIColor(hex6: 0xEFEFF4)
+        mode(UIAppleColor.mode).secondarySystemBackground
     }
     
     var tertiarySystemBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return .tertiarySystemBackground
-        }
-        
-        return .white
+        mode(UIAppleColor.mode).tertiarySystemBackground
     }
     
 }
@@ -62,27 +61,15 @@ public extension UIAppleColor {
 public extension UIAppleColor {
     
     var systemGroupedBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGroupedBackground
-        }
-        
-        return UIColor(hex6: 0xEFEFF4)
+        mode(UIAppleColor.mode).systemGroupedBackground
     }
     
     var secondarySystemGroupedBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return .secondarySystemGroupedBackground
-        }
-        
-        return .white
+        mode(UIAppleColor.mode).secondarySystemGroupedBackground
     }
     
     var tertiarySystemGroupedBackground: UIColor {
-        if #available(iOS 13.0, *) {
-            return .tertiarySystemGroupedBackground
-        }
-        
-        return UIColor(hex6: 0xEFEFF4)
+        mode(UIAppleColor.mode).tertiarySystemGroupedBackground
     }
     
 }
@@ -91,35 +78,19 @@ public extension UIAppleColor {
 public extension UIAppleColor {
     
     var systemFill: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemFill
-        }
-        
-        return UIColor(hex6: 0x787880, alpha: 0.2)
+        mode(UIAppleColor.mode).systemFill
     }
     
     var secondarySystemFill: UIColor {
-        if #available(iOS 13.0, *) {
-            return .secondarySystemFill
-        }
-        
-        return UIColor(hex6: 0x787880, alpha: 0.16)
+        mode(UIAppleColor.mode).secondarySystemFill
     }
     
     var tertiarySystemFill: UIColor {
-        if #available(iOS 13.0, *) {
-            return .tertiarySystemFill
-        }
-        
-        return UIColor(hex6: 0x767680, alpha: 0.12)
+        mode(UIAppleColor.mode).tertiarySystemFill
     }
 
     var quaternarySystemFill: UIColor {
-        if #available(iOS 13.0, *) {
-            return .quaternarySystemFill
-        }
-        
-        return UIColor(hex6: 0x747480, alpha: 0.08)
+        mode(UIAppleColor.mode).quaternarySystemFill
     }
     
 }
@@ -128,51 +99,27 @@ public extension UIAppleColor {
 public extension UIAppleColor {
     
     var lightText: UIColor {
-        if #available(iOS 13.0, *) {
-            return .lightText
-        }
-        
-        return UIColor.white.withAlphaComponent(0.6)
+        mode(UIAppleColor.mode).lightText
     }
 
     var darkText: UIColor {
-        if #available(iOS 13.0, *) {
-            return .darkText
-        }
-        
-        return .black
+        mode(UIAppleColor.mode).darkText
     }
     
     var label: UIColor {
-        if #available(iOS 13.0, *) {
-            return .label
-        }
-        
-        return .black
+        mode(UIAppleColor.mode).label
     }
     
     var secondaryLabel: UIColor {
-        if #available(iOS 13.0, *) {
-            return .secondaryLabel
-        }
-        
-        return UIColor(hex6: 0x3C3C43, alpha: 0.6)
+        mode(UIAppleColor.mode).secondaryLabel
     }
     
     var tertiaryLabel: UIColor {
-        if #available(iOS 13.0, *) {
-            return .tertiaryLabel
-        }
-        
-        return UIColor(hex6: 0x3C3C43, alpha: 0.3)
+        mode(UIAppleColor.mode).tertiaryLabel
     }
     
     var quaternaryLabel: UIColor {
-        if #available(iOS 13.0, *) {
-            return .quaternaryLabel
-        }
-        
-        return UIColor(hex6: 0x3C3C43, alpha: 0.18)
+        mode(UIAppleColor.mode).quaternaryLabel
     }
     
 }
@@ -180,36 +127,20 @@ public extension UIAppleColor {
 public extension UIAppleColor {
     
     var link: UIColor {
-        if #available(iOS 13.0, *) {
-            return .link
-        }
-        
-        return UIColor(hex6: 0x007AFF, alpha: 0.18)
+        mode(UIAppleColor.mode).link
     }
 
     
     var placeholderText: UIColor {
-        if #available(iOS 13.0, *) {
-            return .placeholderText
-        }
-        
-        return UIColor(hex6: 0x3C3C43, alpha: 0.3)
+        mode(UIAppleColor.mode).placeholderText
     }
 
     var separator: UIColor {
-        if #available(iOS 13.0, *) {
-            return .separator
-        }
-        
-        return UIColor(hex6: 0x3C3C43, alpha: 0.29)
+        mode(UIAppleColor.mode).separator
     }
 
     var opaqueSeparator: UIColor {
-        if #available(iOS 13.0, *) {
-            return .opaqueSeparator
-        }
-        
-        return UIColor(hex6: 0xC6C6C8)
+        mode(UIAppleColor.mode).opaqueSeparator
     }
     
 }
@@ -218,89 +149,63 @@ public extension UIAppleColor {
 public extension UIAppleColor {
     
     var systemRed: UIColor {
-        .systemRed
+        mode(UIAppleColor.mode).systemRed
     }
 
     var systemGreen: UIColor {
-        .systemGreen
+        mode(UIAppleColor.mode).systemGreen
     }
 
     var systemBlue: UIColor {
-        .systemBlue
+        mode(UIAppleColor.mode).systemBlue
     }
 
     var systemOrange: UIColor {
-        .systemOrange
+        mode(UIAppleColor.mode).systemOrange
     }
 
     var systemYellow: UIColor {
-        .systemYellow
+        mode(UIAppleColor.mode).systemYellow
     }
 
     var systemPink: UIColor {
-        .systemPink
+        mode(UIAppleColor.mode).systemPink
     }
 
     var systemPurple: UIColor {
-        .systemPurple
+        mode(UIAppleColor.mode).systemPurple
     }
 
     var systemTeal: UIColor {
-        .systemTeal
+        mode(UIAppleColor.mode).systemTeal
     }
 
     var systemIndigo: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemIndigo
-        }
-        
-        return UIColor(hex6: 0x5856D6)
+        mode(UIAppleColor.mode).systemIndigo
     }
-
     
     var systemGray: UIColor {
-        .systemGray
+        mode(UIAppleColor.mode).systemGray
     }
-
     
     var systemGray2: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGray2
-        }
-        
-        return UIColor(hex6: 0xAEAEB2)
+        mode(UIAppleColor.mode).systemGray2
     }
 
     var systemGray3: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGray3
-        }
-        
-        return UIColor(hex6: 0xC7C7CC)
+        mode(UIAppleColor.mode).systemGray3
     }
 
     var systemGray4: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGray4
-        }
-        
-        return UIColor(hex6: 0xD1D1D6)
+        mode(UIAppleColor.mode).systemGray4
     }
 
     var systemGray5: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGray5
-        }
-        
-        return UIColor(hex6: 0xE5E5EA)
+        mode(UIAppleColor.mode).systemGray5
     }
 
     var systemGray6: UIColor {
-        if #available(iOS 13.0, *) {
-            return .systemGray6
-        }
-        
-        return UIColor(hex6: 0xF2F2F7)
+        mode(UIAppleColor.mode).systemGray6
     }
     
 }

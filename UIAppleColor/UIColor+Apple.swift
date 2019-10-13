@@ -19,14 +19,14 @@ public final class UIAppleColor {
     
     fileprivate static var mode: UIAppleColor.Mode = .light
     
-    enum Mode {
+    public enum Mode {
         case light
         case dark
     }
     
     /// Versions below iOS 13 default Mode
     /// - Parameter mode: Light/Dark Mode (below iOS 13)
-    static func setup(mode: UIAppleColor.Mode) {
+    static public func setup(mode: UIAppleColor.Mode) {
         self.mode = mode
     }
     
@@ -34,7 +34,7 @@ public final class UIAppleColor {
     /// Versions below iOS 13 Mode
     /// iOS13 and above, color values based on system theme
     /// - Parameter mode: Light/Dark Mode (below iOS 13)
-    func mode(_ mode: UIAppleColor.Mode) -> UIAppleColorWrapper<UIAppleColor> {
+    public func mode(_ mode: UIAppleColor.Mode) -> UIAppleColorWrapper<UIAppleColor> {
         UIAppleColorWrapper<UIAppleColor>(self, mode: mode)
     }
     

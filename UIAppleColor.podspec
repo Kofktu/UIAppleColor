@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "UIAppleColor"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "Apple System Color"
   s.homepage     = "https://github.com/Kofktu/UIAppleColor"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"

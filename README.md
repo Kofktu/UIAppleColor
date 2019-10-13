@@ -6,7 +6,7 @@
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 - Apple System Color
-- Versions below iOS 13 use the Light Mode Color
+- Versions below iOS 13 use the Light/Dark Mode Color
 
 ## Example
 
@@ -29,31 +29,31 @@ public extension UIColor {
 }
 
 public struct UIAppleColor {
-	var systemBackground: UIColor
+    var systemBackground: UIColor
     var secondarySystemBackground: UIColor
     var tertiarySystemBackground: UIColor
-    
+
     var systemGroupedBackground: UIColor
     var secondarySystemGroupedBackground: UIColor
     var tertiarySystemGroupedBackground: UIColor
-    
+
     var systemFill: UIColor
     var secondarySystemFill: UIColor
     var tertiarySystemFill: UIColor
     var quaternarySystemFill: UIColor
-    
+
     var lightText: UIColor
     var darkText: UIColor
     var label: UIColor
     var secondaryLabel: UIColor
     var tertiaryLabel: UIColor
     var quaternaryLabel: UIColor
-    
+
     var link: UIColor
     var placeholderText: UIColor
     var separator: UIColor
     var opaqueSeparator: UIColor
-    
+
     var systemRed: UIColor
     var systemGreen: UIColor
     var systemBlue: UIColor
@@ -70,6 +70,22 @@ public struct UIAppleColor {
     var systemGray5: UIColor
     var systemGray6: UIColor
 }
+```
+
+#### When using dark mode below iOS 13
+
+
+```swift
+// once in the first time
+UIAppleColor.setup(mode: .dark)
+
+let label = UILabel()
+label.textColor = UIColor.apple.label
+```
+
+```swift
+let label = UILabel()
+label.textColor = UIColor.apple.mode(.dark).label
 ```
 
 ## Installation

@@ -9,7 +9,20 @@
 import Foundation
 import UIKit
 
-fileprivate extension UIAppleColor.Mode {
+import Foundation
+import UIKit
+
+private extension UIAppleColor.Mode {
+    
+    @available(iOS 12.0, *)
+    var userInterfaceStyle: UIUserInterfaceStyle {
+        switch self {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
     
     func value(light lightColor: UIColor,
                dark darkColor: UIColor) -> UIColor {
@@ -19,17 +32,6 @@ fileprivate extension UIAppleColor.Mode {
         case .dark:
             return darkColor
         }
-    }
-    
-    func value(`default` color: UIColor,
-               light lightColor: UIColor,
-               dark darkColor: UIColor) -> UIColor {
-        if #available(iOS 13.0, *) {
-            return color
-        }
-        
-        return value(light: lightColor,
-                     dark: darkColor)
     }
     
 }
@@ -46,11 +48,27 @@ public final class UIAppleColorWrapper<Base> {
     
 }
 
+private extension UIAppleColorWrapper {
+    
+    var isEqualUserInteraceStyle: Bool {
+        if #available(iOS 12.0, *) {
+            guard let window = UIApplication.shared.windows.first else {
+                return true
+            }
+            
+            return window.traitCollection.userInterfaceStyle == mode.userInterfaceStyle
+        }
+        
+        return false
+    }
+    
+}
+
 // System Backgrounds
 public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     var systemBackground: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemBackground
         }
         
@@ -59,7 +77,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var secondarySystemBackground: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .secondarySystemBackground
         }
         
@@ -68,10 +86,10 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var tertiarySystemBackground: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .tertiarySystemBackground
         }
-        
+                
         return mode.value(light: .white,
                           dark: UIColor(hex6: 0x2C2C2E))
     }
@@ -82,7 +100,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
 public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     var systemGroupedBackground: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemGroupedBackground
         }
         
@@ -91,7 +109,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var secondarySystemGroupedBackground: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .secondarySystemGroupedBackground
         }
         
@@ -100,7 +118,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var tertiarySystemGroupedBackground: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .tertiarySystemGroupedBackground
         }
         
@@ -114,7 +132,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
 public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     var systemFill: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemFill
         }
         
@@ -123,7 +141,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var secondarySystemFill: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .secondarySystemFill
         }
         
@@ -132,7 +150,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var tertiarySystemFill: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .tertiarySystemFill
         }
         
@@ -141,7 +159,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var quaternarySystemFill: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .quaternarySystemFill
         }
         
@@ -171,7 +189,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var label: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .label
         }
         
@@ -180,7 +198,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var secondaryLabel: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .secondaryLabel
         }
         
@@ -189,7 +207,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var tertiaryLabel: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .tertiaryLabel
         }
         
@@ -198,7 +216,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var quaternaryLabel: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .quaternaryLabel
         }
         
@@ -211,7 +229,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
 public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     var link: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .link
         }
         
@@ -221,7 +239,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     
     var placeholderText: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .placeholderText
         }
         
@@ -230,7 +248,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var separator: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .separator
         }
         
@@ -239,7 +257,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var opaqueSeparator: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .opaqueSeparator
         }
         
@@ -253,55 +271,79 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
 public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     var systemRed: UIColor {
-        mode.value(default: .systemRed,
-                   light: UIColor(hex6: 0xFF3B30),
-                   dark: UIColor(hex6: 0xFF453A))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemRed
+        }
+        
+        return mode.value(light: UIColor(hex6: 0xFF3B30),
+                          dark: UIColor(hex6: 0xFF453A))
     }
     
     var systemGreen: UIColor {
-        mode.value(default: .systemGreen,
-                   light: UIColor(hex6: 0x34C759),
-                   dark: UIColor(hex6: 0x32D74B))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemGreen
+        }
+        
+        return mode.value(light: UIColor(hex6: 0x34C759),
+                          dark: UIColor(hex6: 0x32D74B))
     }
     
     var systemBlue: UIColor {
-        mode.value(default: .systemBlue,
-                   light: UIColor(hex6: 0x007AFF),
-                   dark: UIColor(hex6: 0x0A84FF))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemBlue
+        }
+        
+        return mode.value(light: UIColor(hex6: 0x007AFF),
+                          dark: UIColor(hex6: 0x0A84FF))
     }
     
     var systemOrange: UIColor {
-        mode.value(default: .systemOrange,
-                   light: UIColor(hex6: 0x007AFF),
-                   dark: UIColor(hex6: 0x0A84FF))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemOrange
+        }
+        
+        return mode.value(light: UIColor(hex6: 0x007AFF),
+                          dark: UIColor(hex6: 0x0A84FF))
     }
     
     var systemYellow: UIColor {
-        mode.value(default: .systemYellow,
-                   light: UIColor(hex6: 0xFFCC00),
-                   dark: UIColor(hex6: 0xFFD60A))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemYellow
+        }
+        
+        return mode.value(light: UIColor(hex6: 0xFFCC00),
+                          dark: UIColor(hex6: 0xFFD60A))
     }
     
     var systemPink: UIColor {
-        mode.value(default: .systemPink,
-                   light: UIColor(hex6: 0xFF2D55),
-                   dark: UIColor(hex6: 0xFF375F))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemPink
+        }
+        
+        return mode.value(light: UIColor(hex6: 0xFF2D55),
+                          dark: UIColor(hex6: 0xFF375F))
     }
     
     var systemPurple: UIColor {
-        mode.value(default: .systemPurple,
-                   light: UIColor(hex6: 0xAF52DE),
-                   dark: UIColor(hex6: 0xBF5AF2))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemPurple
+        }
+        
+        return mode.value(light: UIColor(hex6: 0xAF52DE),
+                          dark: UIColor(hex6: 0xBF5AF2))
     }
     
     var systemTeal: UIColor {
-        mode.value(default: .systemTeal,
-                   light: UIColor(hex6: 0x5AC8FA),
-                   dark: UIColor(hex6: 0x64D2FF))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemTeal
+        }
+        
+        return mode.value(light: UIColor(hex6: 0x5AC8FA),
+                          dark: UIColor(hex6: 0x64D2FF))
     }
     
     var systemIndigo: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemIndigo
         }
         
@@ -311,14 +353,17 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     
     var systemGray: UIColor {
-        mode.value(default: .systemGray,
-                   light: UIColor(hex6: 0x8E8E93),
-                   dark: UIColor(hex6: 0x8E8E93))
+        if #available(iOS 12.0, *), isEqualUserInteraceStyle {
+            return .systemTeal
+        }
+        
+        return mode.value(light: UIColor(hex6: 0x8E8E93),
+                          dark: UIColor(hex6: 0x8E8E93))
     }
     
     
     var systemGray2: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemGray2
         }
         
@@ -327,7 +372,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var systemGray3: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemGray3
         }
         
@@ -336,7 +381,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var systemGray4: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemGray4
         }
         
@@ -345,7 +390,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var systemGray5: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemGray5
         }
         
@@ -354,7 +399,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     }
     
     var systemGray6: UIColor {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, *), isEqualUserInteraceStyle {
             return .systemGray6
         }
         

@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-import Foundation
-import UIKit
-
 private extension UIAppleColor.Mode {
     
     @available(iOS 12.0, *)
@@ -354,7 +351,7 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
     
     var systemGray: UIColor {
         if #available(iOS 12.0, *), isEqualUserInteraceStyle {
-            return .systemTeal
+            return .systemGray
         }
         
         return mode.value(light: UIColor(hex6: 0x8E8E93),

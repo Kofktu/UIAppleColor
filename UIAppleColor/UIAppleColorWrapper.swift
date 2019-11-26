@@ -14,6 +14,14 @@ private extension UIAppleColor.Mode {
     @available(iOS 12.0, *)
     var userInterfaceStyle: UIUserInterfaceStyle {
         switch self {
+        case .auto:
+            if #available(iOS 13.0, *) {
+                if let window = UIApplication.shared.windows.first {
+                    return window.traitCollection.userInterfaceStyle
+                }
+            }
+            
+            return .light
         case .light:
             return .light
         case .dark:
@@ -24,10 +32,16 @@ private extension UIAppleColor.Mode {
     func value(light lightColor: UIColor,
                dark darkColor: UIColor) -> UIColor {
         switch self {
-        case .light:
-            return lightColor
         case .dark:
             return darkColor
+        default:
+            if #available(iOS 12.0, *) {
+                if userInterfaceStyle == .dark {
+                    return darkColor
+                }
+            }
+            
+            return lightColor
         }
     }
     

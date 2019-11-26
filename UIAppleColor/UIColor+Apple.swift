@@ -17,9 +17,10 @@ public extension UIColor {
 
 public final class UIAppleColor {
     
-    fileprivate static var mode: UIAppleColor.Mode = .light
+    fileprivate static var mode: UIAppleColor.Mode = .auto
     
     public enum Mode {
+        case auto
         case light
         case dark
     }

@@ -313,8 +313,8 @@ public extension UIAppleColorWrapper where Base: UIAppleColor {
             return .systemOrange
         }
         
-        return mode.value(light: UIColor(hex6: 0x007AFF),
-                          dark: UIColor(hex6: 0x0A84FF))
+        return mode.value(light: UIColor(hex6: 0xFF9500),
+                          dark: UIColor(hex6: 0xFF9F0A))
     }
     
     var systemYellow: UIColor {

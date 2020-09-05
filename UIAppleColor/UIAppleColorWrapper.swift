@@ -64,7 +64,7 @@ private extension UIAppleColorWrapper {
     var isEqualUserInteraceStyle: Bool {
         if #available(iOS 12.0, *) {
             guard let window = UIApplication.shared.windows.first else {
-                return true
+                return false
             }
             
             return window.traitCollection.userInterfaceStyle == mode.userInterfaceStyle
